@@ -6,10 +6,10 @@
 
 /* SIDEBAR */
 .sidebar {
-  width: 350px;
-  height: 97vh;
-  padding: 10px;
-  background-color: #cdcdcd;
+  background-color: #d5eafd;
+  height: 98vh;
+  padding: 9px;
+  width: 20vw;
   border-right: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
@@ -46,9 +46,9 @@
   height: 50px;
   padding: var(--spacing-md) var(--spacing-lg);
   text-align: left;
-  background: beige;
+  background-color: aliceblue;
   border: none;
-  border-radius: 10px;
+  border-radius: 6px;
   padding: 20px;
   cursor: pointer;
   font-size: 15px;
@@ -65,7 +65,7 @@
 
 .sidebar__btn.is-active {
   background-color: var(--color-primary);
-  color: white;
+  color:cadetblue;
   font-weight: 600;
 }
 
