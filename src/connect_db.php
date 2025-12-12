@@ -17,7 +17,7 @@
             die;
         }
 
-        $query = $dbcon->query('SELECT * FROM cours');
+        $query = $dbcon->query('SELECT * FROM courses');
         return  $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
