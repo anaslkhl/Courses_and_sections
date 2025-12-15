@@ -1,3 +1,28 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (!isset($_POST['id'])) {
+        die('Course ID missing');
+    }
+    $id = intval($_POST['id']);
+
+    try {
+        $cone = new PDO('mysql:host=mysql;dbname=mydb', 'root', 'roopasst');
+        $del = $cone->prepare('DELETE FROM courses WHERE id = ?');
+        $del->execute([$id]);
+
+
+
+        echo '<script>window.location.href="' . $_SERVER['REQUEST_URI'] . '";</script>';
+        // echo '<script>location.reload();</script>';
+        // header("Location: " . $_SERVER['REQUEST_URI']);
+        exit;
+    } catch (PDOException $e) {
+        print 'connection Failed' . $e->getMessage() . '<br>';
+        die;
+    }
+}
+
+?>
 <h2 class="text-3xl font-semibold mb-6">Available Courses</h2>
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -26,10 +51,10 @@
         <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
         </svg>
         </a>
-        <form method="POST" style="display:inline;">
+        <form method="POST" action="" style="display:inline;">
         <input type="hidden" name="id" value="' . htmlspecialchars($course['id']) . '">
         <button type="submit" class="action-btn delete"
-        onclick="return confirm("Are you sure you want to delete this course?")"
+        onclick="return confirm(\"Are you sure you want to delete this course ?"\)"
         
         title="Delete course">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
@@ -45,24 +70,22 @@
     ?>
 
 </div>
-<?php
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['id'])) {
-    $id = intval($_POST['id']);
+<!-- -->
+<!-- // if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['id'])) {
+//     $id = intval($_POST['id']);
 
-    try {
-        $cone = new PDO('mysql:host=mysql;dbname=mydb', 'root', 'roopasst');
-        $del = $cone->prepare('DELETE FROM courses WHERE id = ?');
-        $del->execute([$id]);
+//     try {
+//         $cone = new PDO('mysql:host=mysql;dbname=mydb', 'root', 'roopasst');
+//         $del = $cone->prepare('DELETE FROM courses WHERE id = ?');
+//         $del->execute([$id]);
 
 
-        echo '<script>window.location.href="/pages/list.php";</script>'; // avoids POST resubmission
-        // echo '<script>window.location.reload();</script>';
-        // header("Location: " . $_SERVER['PHP_SELF']);
-        exit;
-    } catch (PDOException $e) {
-        print 'connection Failed' . $e->getMessage() . '<br>';
-        die;
-    }
-}
-
-?>
+//         echo '<script>window.location.href="/pages/list.php";</script>'; // avoids POST resubmission
+//         // echo '<script>window.location.reload();</script>';
+//         // header("Location: " . $_SERVER['PHP_SELF']);
+//         exit;
+//     } catch (PDOException $e) {
+//         print 'connection Failed' . $e->getMessage() . '<br>';
+//         die;
+//     }
+// } -->
